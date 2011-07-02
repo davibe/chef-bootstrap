@@ -40,6 +40,9 @@ password "chef".
 
 The `cloud-init` is redirected to `/var/log/cloud-init.log`.
 
+Feel free to fork this repo, make your own changes, and use the scripts in whatever way you like,
+but do not forget to change the URL to the `chef-server-create-admin.sh` script in `chef-server.init`.
+
 ### Compatibility
 
 The script has been tested with the
@@ -61,16 +64,17 @@ As a workaround:
 - when the process is up ("Successfully bound to port 4040"), stop it with `Ctrl-C`
 - start the `chef-server-webui` service: `sudo /etc/init.d/chef-server-webui start`
 
-The service should start now and log to `less /var/log/chef/server-webui.log`.
+The service should start now and log to `/var/log/chef/server-webui.log`.
 
-### chef-server-webui does not use the configured default admin password
+#### chef-server-webui does not use the configured default admin password
 
 It happens that the web UI does not use admin password configured in the `cloud-init` script ("chef", this will be
 written to `/etc/chef/webui.rb`), but the default "p@ssw0rd1". If you cannot login as admin/chef, try admin/p@ssw0rd1.
 
-### "Tampered with cookie" message when opening the chef web UI
+#### "Tampered with cookie" message when opening the chef web UI
 
 The chef web UI signs its cookies. When you create a completely new chef installation (e.g. by using this script), it
 will create a new session signing key. If you have visited a previous chef installation under the same URL
 (http://chef:4040/) before, your browser might still have cookies signed with the old key, which will lead to this message.
 As a workaround, delete those cookies from your browser cache.
+
